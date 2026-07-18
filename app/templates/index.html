@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NIFTY Paper Trader</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">NIFTY Options • Defined Risk • Paper Trading</p>
+          <h1>my first strategy with claude</h1>
+          <p class="hero-text">
+            A local dashboard for hedged NIFTY option selling with live NSE snapshots,
+            position sizing on Rs. 10L capital, Zerodha charges, and drawdown tracking.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <button id="start-button">Enable Engine</button>
+          <button id="stop-button" class="secondary">Pause Engine</button>
+          <button id="preview-button" class="ghost">Preview Setup</button>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section class="panel primary">
+          <div class="panel-head">
+            <h2>Live Status</h2>
+            <span id="status-pill" class="pill">Waiting</span>
+          </div>
+          <div class="metric-grid">
+            <article class="metric">
+              <span>Spot</span>
+              <strong id="spot-value">-</strong>
+            </article>
+            <article class="metric">
+              <span>India VIX</span>
+              <strong id="vix-value">-</strong>
+            </article>
+            <article class="metric">
+              <span>Nearest Expiry</span>
+              <strong id="expiry-value">-</strong>
+            </article>
+            <article class="metric">
+              <span>Lot Size</span>
+              <strong id="lot-size-value">-</strong>
+            </article>
+            <article class="metric">
+              <span>Equity</span>
+              <strong id="equity-value">-</strong>
+            </article>
+            <article class="metric">
+              <span>Drawdown</span>
+              <strong id="drawdown-value">-</strong>
+            </article>
+          </div>
+          <p id="snapshot-meta" class="meta">Waiting for first NSE snapshot.</p>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Strategy Preview</h2>
+            <span id="preview-badge" class="pill neutral">No setup yet</span>
+          </div>
+          <div id="preview-content" class="stack"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Open Position</h2>
+            <span id="open-trade-pill" class="pill neutral">Flat</span>
+          </div>
+          <div id="open-trade-content" class="stack"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Risk Rules</h2>
+          </div>
+          <ul class="rules">
+            <li>Capital base: Rs. 10,00,000</li>
+            <li>Trades only NIFTY options</li>
+            <li>Paper trading starts on 2026-03-26</li>
+            <li>Single daily entry window: 09:35 to 10:15 IST</li>
+            <li>One position at a time, hedged both sides</li>
+            <li>Costs deducted with Zerodha-style charges</li>
+          </ul>
+        </section>
+
+        <section class="panel span-2">
+          <div class="panel-head">
+            <h2>Equity & Drawdown</h2>
+          </div>
+          <svg id="equity-chart" viewBox="0 0 900 260" role="img" aria-label="Equity curve"></svg>
+          <div id="drawdown-map" class="drawdown-map"></div>
+        </section>
+
+        <section class="panel span-2">
+          <div class="panel-head">
+            <h2>Trade Log</h2>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Opened</th>
+                  <th>Closed</th>
+                  <th>Structure</th>
+                  <th>Lots</th>
+                  <th>Gross</th>
+                  <th>Charges</th>
+                  <th>Net</th>
+                  <th>Exit</th>
+                </tr>
+              </thead>
+              <tbody id="trade-table"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>
